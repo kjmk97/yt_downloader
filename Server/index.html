@@ -4,45 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YTDownloader</title>
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" crossorigin="anonymous">
 </head>
 <body>
-    <header>
-        <!-- navbar -->
+    <header id="top">
+        <nav>
+            <ul>
+                <li><a href="index.html"><i class="fas fa-arrow-circle-down"></i>YTDownloader</a></li>
+            </ul>
+        </nav>
     </header>
-    <section>
-        <div>YTDownloader - Download and Save Youtube Videos</div>
-        <input class="URL-input" type="text"><button class="convert-button">Start</button>
+    <section class="heading">
+        <div><h1>YTDownloader - Download and Save Youtube Videos<h1></div>
+        <input class="URL-input" type="text" placeholder="Paste URL here"><button class="convert-button">Start</button>
     </section>
-    <section>
-        <div><h1>How to download YouTube videos?</h1></div>
-        <div>
-            <div>
-                <h5>Copy YouTube URL</h5>
-                <p>Copy your video URL from YouTube that you need to download. You can use Ctrl+C or with the context menu.</p>
+    <section class='instruct-section'>
+        <div class="instruction-intro"><h1>How to download YouTube videos?</h1></div>
+        <div class="instructions">
+            <div class="instruction-item">
+                <div class="icon">
+                    <i class="fas fa-copy icon-interior"></i>
+                </div>
+                <div class="instruction-body">
+                    <h5 class="instruction-title">Copy YouTube URL</h5>
+                    <p class="instruction-description">Copy your video URL from YouTube that you need to download. You can use Ctrl+C or the context menu.</p>
+                </div>
             </div>
-            <div>
-                <h5>Paste in Text Box Above</h5>
-                <p>Paste YouTube video URL in the text box and click 'Download'. Use Ctrl+V or right click then select paste.</p>
+            <div class="instruction-item">
+                <div class="icon">
+                    <i class="fas fa-mouse-pointer icon-interior"></i>
+                </div>
+                <div class="instruction-body">
+                    <h5 class="instruction-title">Paste in Text Box Above</h5>
+                    <p class="instruction-description">Paste YouTube video URL in the text box and click 'Download'. Use Ctrl+V or right click then select paste.</p>
+                </div>
             </div>
-            <div>
-                <h5>Download Video</h5>
-                <p>Click the 'Download' button above to begin the file download.</p>
+            <div class="instruction-item">
+                <div class="icon">
+                    <i class="fas fa-download icon-interior"></i>
+                </div>
+                <div class="instruction-body">
+                    <h5 class="instruction-title">Download Video</h5>
+                    <p class="instruction-description">Click the 'Download' button above to begin the file download.</p>
+                </div>
             </div>
         </div>
     </section>
     <section>        
-        <div>
-            <h1>The best Youtube to downloader online</h1>
-            <p>YTDownloader is a great tool for downloading music and videos from YouTube! It supports all popular formats: MP4, MP3, FLV, M4V, WMV, WEBM. You can download any video and it is completely free!</p>
-            <h1>Why use YTDownloader?</h1>
-            <p>It is often necessary to download a video from Youtube to a computer to watch it without the Internet during travel, classes, or flights. YouTube provides the ability to save a video in a mobile application, but there is no such function for a computer. Our video downloader allows you to download and save videos to any storage, from where you can play them in the future.</p>
+        <div class="info-section">
+            <h1 class="info">The best Youtube downloader online</h1>
+            <p class="info">YTDownloader is a great tool for downloading music and videos from YouTube! It supports all popular formats: MP4, MP3, FLV, M4V, WMV, WEBM. You can download any video and it is completely free!</p>
+            <h1 class="info">Why use YTDownloader?</h1>
+            <p class="info">It is often necessary to download a video from Youtube to a computer to watch it without the Internet during travel, classes, or flights. YouTube provides the ability to save a video in a mobile application, but there is no such function for a computer. Our video downloader allows you to download and save videos to any storage, from where you can play them in the future.</p>
         </div>
-        <div>
-            <a href="#main">Start Download!</a>
+        <div class="button-container">
+            <a href="#top" class="bottom-button">Start Download</a>
         </div>
     </section>
     <footer>
-        <a></a><a></a>
         <p>© 2018 YTDownloader</p>
     </footer>
     <script src="app.js"></script>
