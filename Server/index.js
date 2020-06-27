@@ -18,14 +18,40 @@ app.get('/app.js', (req, res) => {
     res.sendFile(path.join(__dirname+'/app.js'));
 });
 
+app.get('/style.css', (req, res) => {
+    res.sendFile(path.join(__dirname+'/style.css'));
+});
+app.get('/favicon.png', (req, res) => {
+    res.sendFile(path.join(__dirname+'/favicon.png'));
+});
+
 app.get('/download', (req,res) => {
+    try {
+        var URL = req.query.URL;
 
-    var URL = req.query.URL;
+        res.header('Content-Disposition', 'attachment; filename="video.mp4"');
+        ytdl(URL, {
+            format: 'mp4',
+            }).pipe(res);
+    } catch(err) {
+        next(err)
+    }
+});
 
-    res.header('Content-Disposition', 'attachment; filename="video.mp4"');
+// 404 Error
+app.use((req, res, next) => {
+    const err = new Error('Not found');
+    err.status = 404;
+    next(err);
+});
 
-    ytdl(URL, {
-        format: 'mp4',
-        quality: 'highestaudio'
-        }).pipe(res);
+// Error Handler
+app.use((err, req, res, next) => {
+    res.status(err.status || 500);
+    res.send({
+        error: {
+            status: err.status || 500,
+            message: err.message
+        }
+    });
 });
