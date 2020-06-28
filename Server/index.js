@@ -6,8 +6,8 @@ var path = require('path');
 
 app.use(cors());
 
-app.listen(4000, () => {
-    console.log('Server Works !!! At port 4000');
+app.listen(3000, () => {
+    console.log('Server Works !!! At port 3000');
 });
 
 app.get('/', (req, res) => {
