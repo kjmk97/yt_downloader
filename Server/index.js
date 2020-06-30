@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const ytdl = require('ytdl-core');
 const app = express();
+const ffmpeg = require('fluent-ffmpeg');
+const readline = require('readline');
+
 var path = require('path');
 
 app.use(cors());
@@ -28,16 +31,21 @@ app.get('/favicon.png', (req, res) => {
 app.get('/download', (req,res) => {
     try {
         var URL = req.query.URL;
-
-        res.header('Content-Disposition', 'attachment; filename="video.mp4"');
-        ytdl(URL, {
-            format: 'mp4',
-            }).pipe(res);
+        let stream = ytdl(URL, {
+            quality: 'highestaudio',
+          });
+        res.header('Content-Disposition', 'attachment; filename="video.mp3"');
+    	ffmpeg(stream)
+            .audioBitrate(128)
+            .format('mp3')
+            .on('error', function(err) {
+            console.log('An error occurred: ' + err.message);
+            })
+            .writeToStream(res);
     } catch(err) {
         next(err)
     }
 });
-
 // 404 Error
 app.use((req, res, next) => {
     const err = new Error('Not found');
