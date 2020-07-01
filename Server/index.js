@@ -3,14 +3,22 @@ const cors = require('cors');
 const ytdl = require('ytdl-core');
 const app = express();
 const ffmpeg = require('fluent-ffmpeg');
-const readline = require('readline');
+const fs = require('fs');
+const https = require('https');
+
+var certificate  = fs.readFileSync('/etc/letsencrypt/live/youtubetomp3.plus/fullchain.pem', 'utf8');
+var privateKey = fs.readFileSync('/etc/letsencrypt/live/youtubetomp3.plus/privkey.pem', 'utf8');
+
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
+httpsServer.listen(8443);
 
 var path = require('path');
 
 app.use(cors());
 
-app.listen(3000, () => {
-    console.log('Server Works !!! At port 3000');
+app.listen(8080, () => {
+    console.log('Server Works !!! At port 8080');
 });
 
 app.get('/', (req, res) => {
@@ -28,7 +36,7 @@ app.get('/favicon.png', (req, res) => {
     res.sendFile(path.join(__dirname+'/favicon.png'));
 });
 
-app.get('/download', (req,res) => {
+app.get('/download', (req,res,next) => {
     try {
         var URL = req.query.URL;
         let stream = ytdl(URL, {
@@ -39,7 +47,8 @@ app.get('/download', (req,res) => {
             .audioBitrate(128)
             .format('mp3')
             .on('error', function(err) {
-            console.log('An error occurred: ' + err.message);
+                console.log('An error occurred: ' + err.message);
+                next(err)
             })
             .writeToStream(res);
     } catch(err) {
@@ -55,11 +64,5 @@ app.use((req, res, next) => {
 
 // Error Handler
 app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.send({
-        error: {
-            status: err.status || 500,
-            message: err.message
-        }
-    });
+    res.status(500).sendFile(path.join(__dirname+'/index.html'))
 });
